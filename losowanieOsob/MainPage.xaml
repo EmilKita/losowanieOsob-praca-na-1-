@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:losowanieOsob"
+             x:Class="losowanieOsob.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout>
+
+            <CollectionView ItemsSource="{x:Static local:Groups.GroupsList}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Spacing="10">
+                            <RadioButton IsChecked="{Binding IsSelected}" GroupName="GroupSelection"/>
+                            <Label Text="{Binding GroupName}" FontSize="20"/>
+                            <CollectionView ItemsSource="{Binding Students}">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <HorizontalStackLayout>
+                                            <Label Text="{Binding}" />
+                                            <Button Text="-" Clicked="RemoveStudent" CommandParameter="{Binding .}"/>
+                                        </HorizontalStackLayout>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Editor x:Name="newStudentEditor" Grid.Column="1" Placeholder="Enter student name" />
+            <Button Text="Add Student" Grid.Column="1" VerticalOptions="Start" Clicked="AddStudent_Clicked"/>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
